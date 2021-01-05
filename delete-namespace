@@ -1,0 +1,3 @@
+kubectl get namespace annoying-namespace-to-delete -o json > tmp.json
+edit tmp.json and remove"kubernetes" from "spec": { "finalizers":[]}
+curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json 127.0.0.1:8001/api/v1/namespaces/annoying-namespace-to-delete/finalize
